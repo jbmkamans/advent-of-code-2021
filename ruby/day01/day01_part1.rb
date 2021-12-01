@@ -1,4 +1,4 @@
-depths = IO.readlines('../input/day1_part1.txt').map(&:to_i)
+depths = IO.readlines('../input/day01.txt').map(&:to_i)
 p depths
 
 depth_diffs = []
