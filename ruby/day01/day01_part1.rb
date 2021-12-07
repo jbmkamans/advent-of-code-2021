@@ -4,12 +4,12 @@ inputfile = AOCInputFile.path(__FILE__)
 depths = File.readlines(inputfile).map(&:to_i)
 p depths
 
-depth_diffs = []
+# map each index to true if its successor is greater, false otherwise
+depths.map!.with_index do |depth, index|
+  # skip last index, that has no successor
+  next if index >= depths.size - 1
 
-depths.each_with_index do |depth, index|
-  next if index.zero?
-
-  depth_diffs << (depth > depths[index - 1] ? 1 : 0)
+  depth < depths[index + 1]
 end
 
-p depth_diffs.reduce(&:+)
+puts "\nThe answer is: #{depths.count(true)}"
