@@ -1,4 +1,7 @@
-depths = IO.readlines('../input/day01.txt').map(&:to_i)
+require '../utils/aoc_input_file'
+inputfile = AOCInputFile.path(__FILE__)
+
+depths = File.readlines(inputfile).map(&:to_i)
 p depths
 
 depth_diffs = []
