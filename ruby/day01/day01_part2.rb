@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require '../utils/aoc_input_file'
 inputfile = AOCInputFile.path(__FILE__)
 
