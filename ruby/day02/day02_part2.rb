@@ -3,27 +3,23 @@
 require '../utils/aoc_input_file'
 inputfile = AOCInputFile.path(__FILE__)
 
-depths = File.readlines(inputfile)
+submarine_stats = File.readlines(inputfile)
+                      .map(&:split)
+                      .each_with_object({ 'aim' => 0, 'depth' => 0, 'pos' => 0 }) do |line, obj|
+                        value = line[1].to_i
 
-n = 0
-aim = 0
-horizontal_position = 0
-depth = 0
-instructions = { 'forward' => 0, 'up' => 0, 'down' => 0 }
-while n < depths.length
-  instruction, value = depths[n].split
-  value = value.to_i
+                        case line[0]
+                        when 'up'
+                          obj['aim'] -= value
+                        when 'down'
+                          obj['aim'] += value
+                        when 'forward'
+                          obj['depth'] += obj['aim'] * value
+                          obj['pos'] += value
+                        else
+                          raise "Invalid instruction: #{line[0]}"
+                        end
+                      end
 
-  case instruction
-  when 'up'
-    aim -= value
-  when 'down'
-    aim += value
-  when 'forward'
-    depth += aim * value
-    horizontal_position += value
-  end
-
-  n += 1
-end
-p depth * horizontal_position
+p submarine_stats
+p submarine_stats['depth'] * submarine_stats['pos']
